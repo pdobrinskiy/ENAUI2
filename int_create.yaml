@@ -1,0 +1,18 @@
+---
+- name: Create and address loopback interface
+  hosts: iosxe
+  gather_facts: no
+
+  tasks:
+  - name: Create loopback 101
+    cisco.ios.ios_interfaces:
+      config:
+      - name: Loopback101
+        description: ENAUI
+        enabled: true
+  - name: Assign IP to loopback
+    cisco.ios.ios_l3_interfaces:
+      config:
+      - name: Loopback101
+        ipv4:
+        - address: 1.1.1.1/32
